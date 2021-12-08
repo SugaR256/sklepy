@@ -1,17 +1,17 @@
 package sklepy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class Sklep {
 
     private String adres;
     private String adresWWW;
-    private Pracownik[] pracownicy;
-
-    // Aktualna ilość pracowników
-    private int aktualnaIloscPracownikow;
-    private int CAPACITY = 3;          // DO CELÓW TESTOWANIA wartość to 3: najlepiej ustawić na 10
+    // TUTAJ ZMIANA - Jak już wprowadziliśmy sobie kolekcje, to uznałam
+    // że listą się wygodniej operuje niż tablicą
+    private final List<Pracownik> pracownicy;
 
     // To jest struktura która będzie każdemu produktowi
     // przyporządkowywać jego ilość w sklepie
@@ -22,9 +22,8 @@ public abstract class Sklep {
     public Sklep(String adres, String adresWWW) {
         this.adres = adres;
         this.adresWWW = adresWWW;
-        pracownicy = new Pracownik[CAPACITY];
+        pracownicy = new ArrayList<>();
         magazyn = new HashMap<>();
-
     }
 
     // -------------- METODY ABSTRAKCYJNE - DO NADPISANIA --------------
@@ -68,17 +67,7 @@ public abstract class Sklep {
     }
 
     public void zrekrutuj(Pracownik pracownik){
-        zwiekszPojemnoscTablicy();
-        pracownicy[aktualnaIloscPracownikow++] = pracownik;
-    }
-
-    private void zwiekszPojemnoscTablicy(){
-        if (aktualnaIloscPracownikow >= CAPACITY){
-            CAPACITY *= 2;
-            Pracownik[] wiekszaTab = new Pracownik[CAPACITY];
-            System.arraycopy(pracownicy, 0, wiekszaTab, 0, aktualnaIloscPracownikow);
-            pracownicy = wiekszaTab;      // Zmieniamy referencję na nową, większą tablicę
-        }
+        pracownicy.add(pracownik);
     }
 
 
@@ -86,8 +75,8 @@ public abstract class Sklep {
 
     // Wyświetla informacje na temat pracowników
     public void wyswietlPracownikow(){
-        for (int i = 0; i < aktualnaIloscPracownikow; i++){
-            System.out.println(pracownicy[i]);
+        for (Pracownik pracownik: pracownicy){
+            System.out.println(pracownik);
         }
     }
 
@@ -115,6 +104,6 @@ public abstract class Sklep {
     }
 
     public int getAktualnaIloscPracownikow() {
-        return aktualnaIloscPracownikow;
+        return pracownicy.size();
     }
 }
