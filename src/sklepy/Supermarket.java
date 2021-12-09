@@ -17,8 +17,8 @@ public abstract class Supermarket extends Sklep {
 
     public Supermarket(String adres, String adresWWW) {
         super(adres, adresWWW);
-        gazetka = new ArrayList<Produkt>();
-        originalneCeny = new HashMap<String, Double>();
+        gazetka = new ArrayList<>();
+        originalneCeny = new HashMap<>();
     }
 
     // W kwestii rabatow itp - w tej metodzie chcialbym ustalic

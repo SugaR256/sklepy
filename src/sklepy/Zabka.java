@@ -1,5 +1,7 @@
 package sklepy;
 
+import java.util.Objects;
+
 class Zabka extends Sklep {
 
     boolean czyJestMozliwoscSprzedazyProduktowNaCieplo;
@@ -45,20 +47,15 @@ class Zabka extends Sklep {
     }
 
     //METODY:
-
-
     @Override
     public boolean czyJestOtwarty(String dzienTygodnia, int godzina) {
-        if (godzina < 6 || godzina > 23) {
-            return false;
-        } else return true;
+        return godzina >= 6 && godzina <= 23;
     }
 
     @Override
     public double sprzedajProdukt(Produkt produkt, int ilosc) {
-
         if (super.sprawdzDostepnoscProduktu(produkt) >= ilosc) {
-            if (produkt.getNazwa() == "hotdog" || produkt.getNazwa() == "panini" || produkt.getNazwa() == "kawa") {
+            if (Objects.equals(produkt.getNazwa(), "hotdog") || Objects.equals(produkt.getNazwa(), "panini") || Objects.equals(produkt.getNazwa(), "kawa")) {
                 if (!czyJestMozliwoscSprzedazyProduktowNaCieplo) {
                     System.out.print("Mozliwosc sprzedazy produktow na cieplo nie jest aktualnie mozliwa.\n");
                     return 0;
@@ -68,14 +65,12 @@ class Zabka extends Sklep {
         } else
             System.out.print("Niewystarczajaca ilosc produktu na magazynie.\n");
 
-        double suma = produkt.getCena() * ilosc;
-        return suma;
+        return produkt.getCena() * ilosc;
     }
 
     public double sprzedajProduktZAplikacja(Produkt produkt, int ilosc) {
         sprzedajProdukt(produkt, ilosc);
         System.out.print("Punkty w aplikacji zostaly naliczone.\n");
-        double suma = produkt.getCena() * ilosc;
-        return suma;
+        return produkt.getCena() * ilosc;
     }
 }

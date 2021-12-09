@@ -1,27 +1,29 @@
 package sklepy;
 
+import java.util.Objects;
+
 abstract public class SklepMeblowy extends Sklep {
 
-    boolean czyMoznaBracNaRaty;
+    boolean czyMoznaKupowacNaRaty;
 
     //KONSTRUKTOR:
 
-    public SklepMeblowy(boolean czyMoznaBracNaRaty, String adres, String adresWWW) {
+    public SklepMeblowy(boolean czyMoznaKupowacNaRaty, String adres, String adresWWW) {
 
         super(adres, adresWWW);
-        this.czyMoznaBracNaRaty = czyMoznaBracNaRaty;
+        this.czyMoznaKupowacNaRaty = czyMoznaKupowacNaRaty;
     }
 
     // GETTERY:
 
-    public boolean getCzyMoznaBracNaRaty() {
-        return czyMoznaBracNaRaty;
+    public boolean getCzyMoznaKupowacNaRaty() {
+        return czyMoznaKupowacNaRaty;
     }
 
     //SETTERY:
 
-    public void setCzyMoznaBracNaRaty(boolean czyMoznaBracNaRaty) {
-        this.czyMoznaBracNaRaty = czyMoznaBracNaRaty;
+    public void setCzyMoznaKupowacNaRaty(boolean czyMoznaKupowacNaRaty) {
+        this.czyMoznaKupowacNaRaty = czyMoznaKupowacNaRaty;
     }
 
 
@@ -29,12 +31,10 @@ abstract public class SklepMeblowy extends Sklep {
 
     @Override
     public boolean czyJestOtwarty(String dzienTygodnia, int godzina) {
-        if (dzienTygodnia == "Niedziela")
+        if (Objects.equals(dzienTygodnia, "Niedziela")) {
             return false;
-        if (godzina < 9 || godzina > 21)
-            return false;
-        else
-            return true;
+        }
+        return godzina >= 9 && godzina <= 21;
     }
 
     @Override
@@ -42,11 +42,11 @@ abstract public class SklepMeblowy extends Sklep {
         if (super.sprawdzDostepnoscProduktu(produkt) >= ilosc) {
             super.aktualizujIloscProduktow(produkt, -ilosc);
             System.out.print("Sprzedaz zakonczona pomyslnie.\n");
-        } else
+        } else  {
             System.out.print("Niewystarczajaca ilosc produktu na magazynie.\n");
+        }
 
-        double suma = produkt.getCena() * ilosc;
-        return suma;
+        return produkt.getCena() * ilosc;
     }
 
     public void dostarczZamowienie() {

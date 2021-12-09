@@ -5,7 +5,7 @@ public class FirmaDostawcza {
     private int czasDostawy;
     private String adresSiedziby;
 
-    //typical konstruktor
+    // typical konstruktor
     FirmaDostawcza(String nazwaFirmy, int czasDostawy, String adresSiedziby) {
         this.nazwaFirmy = nazwaFirmy;
         this.czasDostawy = czasDostawy;
@@ -20,8 +20,7 @@ public class FirmaDostawcza {
         System.out.format("Dostarczono produkty do klientów sklepu budowniczego przy %s", sklep.getAdres());
     }
 
-    //settery/gettery
-    //
+    // settery/gettery
     public void setNazwaFirmy(String nazwaFirmy) {
         this.nazwaFirmy = nazwaFirmy;
     }

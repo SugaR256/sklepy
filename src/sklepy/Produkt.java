@@ -5,7 +5,7 @@ import java.util.Objects;
 // Prosta klasa, która reprezentuje produkt i jego cenę
 public class Produkt {
 
-    private String nazwa;
+    private final String nazwa;
     private double cena;
 
     public Produkt(String nazwa, double cena) {

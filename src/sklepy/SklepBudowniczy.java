@@ -11,7 +11,7 @@ public abstract class SklepBudowniczy extends Sklep {
 
     public SklepBudowniczy(String adres, String adresWWW) {
         super(adres, adresWWW);
-        dzialy = new ArrayList<String>();
+        dzialy = new ArrayList<>();
     }
 
     // HashMap pozwoli nam na dodawanie przedmiotow do dzialow
@@ -19,7 +19,7 @@ public abstract class SklepBudowniczy extends Sklep {
 
     // Nie zrobilem getterow i setterow dla Mapy,
     // bo uznalem ze protected zalatwi sprawe
-    protected HashMap<Produkt, String> dzialProduktu = new HashMap<Produkt, String>();
+    protected HashMap<Produkt, String> dzialProduktu = new HashMap<>();
 
     // Ta metoda wymaga wprowadzenie tylko jednego przedmiotu
     // W sensie dodajemy 2 krzesla do sklepu ale jedno do dzialu

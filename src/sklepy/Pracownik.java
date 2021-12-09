@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Pracownik {
 
-    private String imie;
-    private String nazwisko;
+    private final String imie;
+    private final String nazwisko;
     private Date dataZatrudnienia;
     private double pensja;
 

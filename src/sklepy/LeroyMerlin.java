@@ -9,7 +9,6 @@ public class LeroyMerlin extends SklepBudowniczy {
 
     private final double rabatDzial = .25;
     private final double rabat = .08;
-    private final double minCena = 300;
 
 
     public LeroyMerlin(String adres, String adresWWW, boolean czySaKasySamoobslugowe, String dzialPromocyjny) {
@@ -40,24 +39,18 @@ public class LeroyMerlin extends SklepBudowniczy {
         int dotychczasowaIlosc = sprawdzDostepnoscProduktu(produkt);
 
         // Nie mozemy sprzedac wiecej niz dostepna ilosc na sklepie
-        if (ilosc > dotychczasowaIlosc)
+        if (ilosc > dotychczasowaIlosc) {
             ilosc = dotychczasowaIlosc;
+        }
 
         // Zmniejszamy ilosc produktow na magazynie
         aktualizujIloscProduktow(produkt, -ilosc);
 
         double suma = ilosc * produkt.getCena();
 
-
         // sprawdza czy obowiazuje rabat dzialowy
-        if (dzialProduktu.get(produkt) == dzialPromocyjny) {
+        if (Objects.equals(dzialProduktu.get(produkt), dzialPromocyjny)) {
             suma -= suma * rabatDzial;
-        }
-
-        // Rabaty sie sumuja
-        // Obowiazuje rabat powyzej minimalnej ceny
-        if (suma >= minCena) {
-            suma -= suma * rabat;
         }
 
         return suma;
