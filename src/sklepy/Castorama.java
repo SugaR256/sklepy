@@ -58,7 +58,6 @@ public class Castorama extends SklepBudowniczy {
     }
 
     @Override
-    // raczej nie o to chodzilo, ale mysle ze git jest
     public void wystawka() {
         System.out.println("W dniu dzisiejszym dział " + dzialPromocyjny + " podlega promocji - " + rabatDzial * 100 + "%");
     }

@@ -9,8 +9,7 @@ public abstract class Sklep {
 
     private String adres;
     private String adresWWW;
-    // TUTAJ ZMIANA - Jak już wprowadziliśmy sobie kolekcje, to uznałam
-    // że listą się wygodniej operuje niż tablicą
+
     private final List<Pracownik> pracownicy;
 
     // To jest struktura która będzie każdemu produktowi
@@ -48,13 +47,13 @@ public abstract class Sklep {
     // To uaktualnia stan produktu na 'magazynie'
     // Jeśli ilość jest dodatnia, to oznacza dostawę produktu
     // Jeśli ujemna oznacza sprzedaż, czyli zmniejszamy ilość produktów na 'magazynie'
-    public void aktualizujIloscProduktow(Produkt produkt, int ilosc){
+    public void aktualizujIloscProduktow(Produkt produkt, int ilosc) {
 
         int aktualnaIlosc = 0;
 
         // Jeśli ten produkt jest już na magazynie, to musimy to też uwzględnić
-        if (magazyn.containsKey(produkt)){
-            aktualnaIlosc =  magazyn.get(produkt);
+        if (magazyn.containsKey(produkt)) {
+            aktualnaIlosc = magazyn.get(produkt);
         }
         magazyn.put(produkt, aktualnaIlosc + ilosc);
     }
@@ -62,11 +61,11 @@ public abstract class Sklep {
     // Ta metoda służy sprawdzeniu, czy sklep dysponuje jakąś ilością produktów.
     // Powinna być użyta w funkcji sprzedajProdukt() do upewnienia się,
     // że można go sprzedać w tej ilości
-    public int sprawdzDostepnoscProduktu(Produkt produkt){
+    public int sprawdzDostepnoscProduktu(Produkt produkt) {
         return magazyn.getOrDefault(produkt, 0);
     }
 
-    public void zrekrutuj(Pracownik pracownik){
+    public void zrekrutuj(Pracownik pracownik) {
         pracownicy.add(pracownik);
     }
 
@@ -74,15 +73,15 @@ public abstract class Sklep {
     // ------------------- GETTERS & SETTERS -----------------------------
 
     // Wyświetla informacje na temat pracowników
-    public void wyswietlPracownikow(){
-        for (Pracownik pracownik: pracownicy){
+    public void wyswietlPracownikow() {
+        for (Pracownik pracownik : pracownicy) {
             System.out.println(pracownik);
         }
     }
 
     // Wyświetla produkty : ich nazwę, cenę oraz ilość na magazynie
-    public void wyswietlOferteSklepu(){
-        for (Map.Entry<Produkt, Integer> el : magazyn.entrySet()){
+    public void wyswietlOferteSklepu() {
+        for (Map.Entry<Produkt, Integer> el : magazyn.entrySet()) {
             System.out.println(el.getKey() + ", ilosc=" + el.getValue());
         }
     }

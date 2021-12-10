@@ -6,7 +6,7 @@ public class FirmaDostawcza {
     private String adresSiedziby;
 
     // typical konstruktor
-    FirmaDostawcza(String nazwaFirmy, int czasDostawy, String adresSiedziby) {
+    public FirmaDostawcza(String nazwaFirmy, int czasDostawy, String adresSiedziby) {
         this.nazwaFirmy = nazwaFirmy;
         this.czasDostawy = czasDostawy;
         this.adresSiedziby = adresSiedziby;

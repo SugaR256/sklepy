@@ -1,55 +1,9 @@
 package sklepy;
 
-import java.util.Date;
+import java.time.LocalDate;
 
-public class Pracownik {
-
-    private final String imie;
-    private final String nazwisko;
-    private Date dataZatrudnienia;
-    private double pensja;
-
-    public Pracownik(String imie, String nazwisko, Date dataZatrudnienia, double pensja) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.dataZatrudnienia = dataZatrudnienia;
-        this.pensja = pensja;
-    }
-
-    // -------- GETTERS & SETTERS --------------
-
-    // Nie ma setterów dla imienia i nazwiska bo to juz inny pracownik byłby
-    public String getImie() {
-        return imie;
-    }
-
-    public String getNazwisko() {
-        return nazwisko;
-    }
-
-    public Date getDataZatrudnienia() {
-        return dataZatrudnienia;
-    }
-
-    public void setDataZatrudnienia(Date dataZatrudnienia) {
-        this.dataZatrudnienia = dataZatrudnienia;
-    }
-
-    public double getPensja() {
-        return pensja;
-    }
-
-    public void setPensja(double pensja) {
-        this.pensja = pensja;
-    }
-
-    @Override
-    public String toString() {
-        return "Pracownik{" +
-                "imie='" + imie + '\'' +
-                ", nazwisko='" + nazwisko + '\'' +
-                ", dataZatrudnienia=" + dataZatrudnienia +
-                ", pensja=" + pensja +
-                '}';
-    }
+public interface Pracownik {
+    String getImie();
+    String getNazwisko();
+    LocalDate getDataZatrudnienia();
 }

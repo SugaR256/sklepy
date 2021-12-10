@@ -6,8 +6,8 @@ public class Vox extends SklepMeblowy {
 
     private boolean czyDzienRabatowy;
 
-    public Vox(String adres, String adresWWW, boolean czyMoznaBracNaRaty, boolean czyDzienRabatowy) {
-        super(czyMoznaBracNaRaty, adres, adresWWW);
+    public Vox(String adres, String adresWWW, boolean czyMoznaKupowacNaRaty, boolean czyDzienRabatowy) {
+        super(czyMoznaKupowacNaRaty, adres, adresWWW);
         this.czyDzienRabatowy = czyDzienRabatowy;
     }
 

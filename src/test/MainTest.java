@@ -1,59 +1,115 @@
 package test;
 
-import sklepy.DniTygodnia;
-import sklepy.Pracownik;
-import sklepy.Produkt;
-import sklepy.Sklep;
+import sklepy.*;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Random;
 
 public class MainTest {
 
-
-    // To nie jest oczywiscie wzorcowe main ale I'm tired XD
     public static void main(String[] args) {
+        final Biedronka biedronka = new Biedronka("ul. Wittiga 12, Wrocław", "biedronka.pl", true);
+        final Castorama castorama = new Castorama("ul. Wschodnia 1, Wrocław", "castorama.pl", false, "umywalki");
+        final Ikea ikea = new Ikea("ul. Poznańska 9, Wrocław", "ikea.pl", true, true);
+        final LeroyMerlin leroyMerlin = new LeroyMerlin("ul. Lerłowska 422, Poznań", "leroymerlin.pl", true, "wiertarki");
+        final Lidl lidl = new Lidl("ul. Akademicka 6, Wrocław", "lidl.pl", true);
+        final Vox vox = new Vox("ul. Meblowa 44, Gdańsk", "vox.pl", true, true);
+        final Zabka zabka = new Zabka(false, "ul. Płazowa 4, Wrocław", "zabka.pl", true);
 
-        Sklep testSklep = new TestSklep("Wrocław, 3 Maja", "https://sklep.pl");
+        final Pracownik[] pracownicy = wygenerujPracownikow();
 
-        Pracownik p1 = new Pracownik("Adam", "Kowalski", new Date(), 1000);
-        Pracownik p2 = new Pracownik("Ewa", "Kowalska", new Date(), 1500);
-        Pracownik p3 = new Pracownik("Janusz", "Nowak", new Date(), 2000);
-        Pracownik p4 = new Pracownik("Paweł", "Pawłowski", new Date(), 2500);
+        biedronka.zrekrutuj(pracownicy[0]);
+        biedronka.zrekrutuj(pracownicy[10]);
+        castorama.zrekrutuj(pracownicy[1]);
+        castorama.zrekrutuj(pracownicy[11]);
+        ikea.zrekrutuj(pracownicy[2]);
+        ikea.zrekrutuj(pracownicy[12]);
+        leroyMerlin.zrekrutuj(pracownicy[3]);
+        leroyMerlin.zrekrutuj(pracownicy[13]);
+        lidl.zrekrutuj(pracownicy[4]);
+        lidl.zrekrutuj(pracownicy[14]);
+        vox.zrekrutuj(pracownicy[5]);
+        vox.zrekrutuj(pracownicy[15]);
+        zabka.zrekrutuj(pracownicy[6]);
+        zabka.zrekrutuj(pracownicy[16]);
 
-        testSklep.zrekrutuj(p1);
-        testSklep.zrekrutuj(p2);
-        testSklep.zrekrutuj(p3);
-        testSklep.zrekrutuj(p4);
+        ikea.wyswietlPracownikow();
 
-        testSklep.wyswietlPracownikow();
+        Produkt sofa1 = new Produkt("sofa1", 1800);
+        Produkt prysznic1 = new Produkt("prysznic1", 900);
+        Produkt umywalka1 = new Produkt("umywalka1", 490);
 
-        Produkt chleb = new Produkt("Chleb", 2.00);
-        Produkt mleko = new Produkt("Mleko", 2.50);
+        castorama.aktualizujIloscProduktow(sofa1, 12);
+        castorama.aktualizujIloscProduktow(prysznic1, 3);
+        castorama.aktualizujIloscProduktow(umywalka1, 19);
 
-        testSklep.aktualizujIloscProduktow(chleb, 8);
-        testSklep.aktualizujIloscProduktow(mleko, 5);
-        // Łącznie 10 chlebów
-        testSklep.aktualizujIloscProduktow(chleb, 2);
+        castorama.wyswietlOferteSklepu();
+        castorama.wystawka();
 
-        testSklep.wyswietlOferteSklepu();
+        castorama.dodajDzial("umywalki");
+        castorama.dodajProduktDoDzialu(umywalka1, "umywalki");
+        castorama.dodajDzial("prysznice");
+        castorama.dodajProduktDoDzialu(prysznic1, "prysznice");
+        castorama.dodajDzial("sofy");
+        castorama.dodajProduktDoDzialu(sofa1, "sofy");
 
-        System.out.println("Kupuje chleb");
-        // Uwzględniając, że co piąty chleb jest za darmo płacimy jak za 4
-        // 4 x 2 = 8
-        System.out.println("Kup chleb " + testSklep.sprzedajProdukt(chleb, 5));
-        // Sprzedaje tyle chlebów, ile zostało, czyli 5
-        System.out.println("Kup chleb " + testSklep.sprzedajProdukt(chleb, 10));
+        System.out.println("Koszt 2 umywalek: " + castorama.sprzedajProdukt(umywalka1, 2));
 
-        System.out.println("Kupuje mleko");
+        castorama.wyswietlOferteSklepu();
 
-        System.out.println("Kup mleko " + testSklep.sprzedajProdukt(mleko, 5));
+        System.out.println("Czy Castorama jest otwarta w niedzielę o 16? " + castorama.czyJestOtwarty(DniTygodnia.NIEDZIELA, 2));
 
-        testSklep.wyswietlOferteSklepu();
+        final FirmaDostawcza inpost = new FirmaDostawcza("Inpost", 3, "Krakowska 12, Warszawa");
+        inpost.dostarczMaterialy(castorama);
 
-        System.out.println(testSklep.czyJestOtwarty(DniTygodnia.PONIEDZIALEK, 12));    // true
-        System.out.println(testSklep.czyJestOtwarty(DniTygodnia.WTOREK, 1));           // false
-        System.out.println(testSklep.czyJestOtwarty(DniTygodnia.NIEDZIELA, 12));       // false
+        final Produkt hotdog = new Produkt("hotdog", 2.20);
+        final Produkt paluszki = new Produkt("paluszki", 3.80);
+        zabka.aktualizujIloscProduktow(paluszki, 30);
+        zabka.aktualizujIloscProduktow(hotdog, 10);
+        zabka.sprawdzDostepnoscProduktu(paluszki);
+        zabka.sprzedajProdukt(hotdog, 1);
 
+        final Produkt chleb = new Produkt("chleb", 5);
+        biedronka.aktualizujIloscProduktow(chleb, 100);
+        System.out.println( biedronka.sprzedajZKartaBiedronki(chleb, 3));
     }
 
+    private static Pracownik[] wygenerujPracownikow() {
+        Pracownik[] pracownicy = new Pracownik[20];
+        pracownicy[0] = new PracownikEtatowy("Grzegorz", "Świąder", losowaData(), losowaPensja());
+        pracownicy[1] = new PracownikEtatowy("Małgorzata", "Nowak", losowaData(), losowaPensja());
+        pracownicy[2] = new PracownikEtatowy("Anna", "Kowalska", losowaData(), losowaPensja());
+        pracownicy[3] = new PracownikEtatowy("Paweł", "Owsiak", losowaData(), losowaPensja());
+        pracownicy[4] = new PracownikEtatowy("Konrad", "Łączny", losowaData(), losowaPensja());
+        pracownicy[5] = new PracownikEtatowy("Zuzanna", "Szczupak", losowaData(), losowaPensja());
+        pracownicy[6] = new PracownikEtatowy("Mikołaj", "Święty", losowaData(), losowaPensja());
+        pracownicy[7] = new PracownikEtatowy("Patryk", "Wysocki", losowaData(), losowaPensja());
+        pracownicy[8] = new PracownikEtatowy("Aniela", "Różnowartościowa", losowaData(), losowaPensja());
+        pracownicy[9] = new PracownikEtatowy("Bartosz", "Monotoniczny", losowaData(), losowaPensja());
+        pracownicy[10] = new PracownikGodzinowy("Wiktor", "Mętny", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[11] = new PracownikGodzinowy("Rupert", "Pomysłowy", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[12] = new PracownikGodzinowy("Bartosz", "Król", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[13] = new PracownikGodzinowy("Lech", "Poznański", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[14] = new PracownikGodzinowy("Fryderyk", "Kwaśnioch", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[15] = new PracownikGodzinowy("Artur", "Śmieszny", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[16] = new PracownikGodzinowy("Robert", "Kubitza", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[17] = new PracownikGodzinowy("Amelia", "Winna", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[18] = new PracownikGodzinowy("Konstancja", "Sokolska", losowaData(), losoweWynagrodzenieGodzinowe());
+        pracownicy[19] = new PracownikGodzinowy("Dominika", "Kulczyk", losowaData(), losoweWynagrodzenieGodzinowe());
+        return pracownicy;
+    }
+
+    private static final Random rng = new Random();
+
+    private static LocalDate losowaData() {
+        return LocalDate.of(rng.nextInt(13) + 2008, rng.nextInt(12) + 1, rng.nextInt(28) + 1);
+    }
+
+    private static int losowaPensja() {
+        return rng.nextInt(3801) + 2400;
+    }
+
+    private static double losoweWynagrodzenieGodzinowe() {
+        return 18.7 + (45 - 18.7) * rng.nextDouble();
+    }
 }

@@ -2,19 +2,17 @@ package sklepy;
 
 import java.util.Objects;
 
-class Zabka extends Sklep {
+public class Zabka extends Sklep {
 
     boolean czyJestMozliwoscSprzedazyProduktowNaCieplo;
-    boolean czyKlientMaAplikacje;
     boolean czyJestKasaSamoobslugowa;
 
     // KONSTRUKTORY:
 
 
-    public Zabka(boolean czyJestMozliwoscSprzedazyProduktowNaCieplo, String adres, String adresWWW, boolean czyKlientMaAplikacje, boolean czyJestKasaSamoobslugowa) {
+    public Zabka(boolean czyJestMozliwoscSprzedazyProduktowNaCieplo, String adres, String adresWWW, boolean czyJestKasaSamoobslugowa) {
         super(adres, adresWWW);
         this.czyJestMozliwoscSprzedazyProduktowNaCieplo = czyJestMozliwoscSprzedazyProduktowNaCieplo;
-        this.czyKlientMaAplikacje = czyKlientMaAplikacje;
         this.czyJestKasaSamoobslugowa = czyJestKasaSamoobslugowa;
     }
 
@@ -22,10 +20,6 @@ class Zabka extends Sklep {
 
     public boolean getCzyJestMozliwoscSprzedazyProduktowNaCieplo() {
         return czyJestMozliwoscSprzedazyProduktowNaCieplo;
-    }
-
-    public boolean getCzyKlientMaAplikacje() {
-        return czyKlientMaAplikacje;
     }
 
     public boolean getCzyJestKasaSamoobslugowa() {
@@ -36,10 +30,6 @@ class Zabka extends Sklep {
 
     public void setCzyJestMozliwoscSprzedazyProduktowNaCieplo(boolean czyJestMozliwoscSprzedazyProduktowNaCieplo) {
         this.czyJestMozliwoscSprzedazyProduktowNaCieplo = czyJestMozliwoscSprzedazyProduktowNaCieplo;
-    }
-
-    public void setCzyKlientMaAplikacje(boolean czyKlientMaAplikacje) {
-        this.czyKlientMaAplikacje = czyKlientMaAplikacje;
     }
 
     public void setCzyJestKasaSamoobslugowa(boolean czyJestKasaSamoobslugowa) {
